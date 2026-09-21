@@ -1,0 +1,16 @@
+# Python virtual environment
+.venv/
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Database credentials and environment variables
+.env
+.env.*
+.env
+.env.*
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
