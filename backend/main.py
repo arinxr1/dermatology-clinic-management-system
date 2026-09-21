@@ -63,3 +63,32 @@ def get_doctors():
 
     finally:
         connection.close()
+
+
+@app.get("/appointments")
+def get_appointments():
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT
+                    appointment_id,
+                    doctor_id,
+                    service_id,
+                    appointment_date,
+                    TIME_FORMAT(start_time, '%H:%i') AS start_time,
+                    TIME_FORMAT(end_time, '%H:%i') AS end_time,
+                    appointment_status
+                FROM appointments
+                ORDER BY appointment_date, start_time
+                LIMIT 50
+                """
+            )
+
+            appointments = cursor.fetchall()
+            return appointments
+
+    finally:
+        connection.close()
